@@ -60,7 +60,30 @@ apt install -y openssh-server lrzsz vim
 ## 设置hostname
 hostnamectl set-hostname sinmachine --static
 
-## 修改pip源为国内 豆瓣
+## 安装miniconda
+MINICONDA_INSTALLER="Miniconda3-latest-Linux-x86_64.sh"  # Change this for macOS or other architectures
+INSTALL_DIR="$HOME/miniconda3"
+
+# Download Miniconda installer
+wget https://repo.anaconda.com/miniconda/$MINICONDA_INSTALLER -O /tmp/$MINICONDA_INSTALLER
+
+# Install Miniconda
+bash /tmp/$MINICONDA_INSTALLER -b -p $INSTALL_DIR
+
+# Add Miniconda to PATH
+echo "export PATH=\"$INSTALL_DIR/bin:\$PATH\"" >> $HOME/.bashrc
+source $HOME/.bashrc
+
+# Clean up installer
+rm /tmp/$MINICONDA_INSTALLER
+
+conda --version
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --set show_channel_urls yes
+
+echo "Miniconda installed!"
+
+## 修改pip源为国内
 mkdir -p ~/.pip
 cat > ~/.pip/pip.conf << EOF
 [global]

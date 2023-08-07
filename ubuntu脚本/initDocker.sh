@@ -25,4 +25,4 @@ systemctl daemon-reload
 systemctl restart docker
 
 apt clean
-apt autoclean
+sudo apt autoremove -y
