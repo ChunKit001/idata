@@ -26,3 +26,5 @@ systemctl restart docker
 
 apt clean
 sudo apt autoremove -y
+
+apt update
